@@ -1,7 +1,8 @@
 // src/context/AppContext.js
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { createContext, useEffect, useState } from 'react';
-import { JOBS as INITIAL_JOBS } from '../mock/jobs'; // ✅ FIXED - import from jobs.js
+import { createContext, useEffect, useState } from 'react';
+import { JOBS as INITIAL_JOBS } from '../mock/jobs';
+import { USERS as MOCK_USERS } from '../mock/users';
 
 export const AppContext = createContext();
 
@@ -67,26 +68,60 @@ export function AppProvider({ children }) {
   }
 
   // 🧩 Mock login/signup
-  // inside AppProvider in src/context/AppContext.js
-function loginMock(email, password) {
-  if (!email || !password) return null;
-  const r = role || 'seeker';
-  const mockUser = { name: 'Demo User', email, role: r };
-  setUser(mockUser);
-  setRole(r); // ensure context role is set
-  return mockUser;
-}
+  function loginMock(email, password) {
+    if (!email || !password) return null;
+    
+    // Check if credentials match mock users
+    const mockUser = MOCK_USERS.find(u => u.email === email);
+    
+    if (mockUser) {
+      setUser(mockUser);
+      setRole(mockUser.role);
+      return mockUser;
+    }
+    
+    // Fallback: create generic user
+    const r = role || 'seeker';
+    const newUser = { name: 'Demo User', email, role: r };
+    setUser(newUser);
+    setRole(r);
+    return newUser;
+  }
 
-function signupMock(email, password) {
-  if (!email || !password) return null;
-  const r = role || 'seeker';
-  const newUser = { name: 'New User', email, role: r };
-  setUser(newUser);
-  setRole(r);
-  return newUser;
-}
+  function signupMock(email, password, opts = {}) {
+    if (!email || !password) return null;
+    
+    // Check if email matches any mock user (for demo login with default credentials)
+    const existingUser = MOCK_USERS.find(u => u.email === email);
+    if (existingUser) {
+      setUser(existingUser);
+      setRole(existingUser.role);
+      return existingUser;
+    }
+    
+    const r = role || 'seeker';
+    const newUser = { 
+      name: opts.name || 'New User', 
+      email, 
+      role: r,
+      fullName: opts.name,
+      mobile: opts.mobile,
+      ...opts
+    };
+    setUser(newUser);
+    setRole(r);
+    return newUser;
+  }
 
-
+  // Mock for social sign-in (UI only)
+  function socialSignInMock(provider = 'Google') {
+    // produce a mock user; provider name will be set as part of email for uniqueness
+    const r = role || 'seeker';
+    const mockUser = { name: `${provider} User`, email: `${provider.toLowerCase()}@mock.com`, role: r, social: provider };
+    setUser(mockUser);
+    setRole(r);
+    return mockUser;
+  }
 
   function logout() {
     setUser(null);
@@ -109,6 +144,7 @@ function signupMock(email, password) {
         setProfile,
         loginMock,
         signupMock,
+        socialSignInMock,
         logout,
       }}
     >

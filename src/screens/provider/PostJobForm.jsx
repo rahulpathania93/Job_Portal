@@ -1,7 +1,9 @@
 // src/screens/provider/PostJobForm.jsx
 import { useContext, useState } from 'react';
-import { Alert, SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native';
+import { Alert, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import InputField from '../../components/ui/InputField';
 import PrimaryButton from '../../components/ui/PrimaryButton';
+import { Colors } from '../../constants/colors';
 import { AppContext } from '../../context/AppContext';
 
 export default function PostJobForm({ navigation }) {
@@ -40,47 +42,118 @@ export default function PostJobForm({ navigation }) {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-      <ScrollView contentContainerStyle={{ padding: 18 }}>
-        <Text style={{ fontSize: 20, fontWeight: '700', marginBottom: 12 }}>Post a Job</Text>
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.content}>
+        <Text style={styles.title}>Post a Job</Text>
+        <Text style={styles.subtitle}>Create a new job listing to attract candidates</Text>
 
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Title</Text>
-        <TextInput value={title} onChangeText={setTitle} placeholder="e.g. Senior React Developer" style={inputStyle} />
+        <InputField
+          label="Job Title"
+          placeholder="e.g. Senior React Developer"
+          value={title}
+          onChangeText={setTitle}
+          leftIcon={<Text style={styles.inputIcon}>💼</Text>}
+        />
 
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Company</Text>
-        <TextInput value={company} onChangeText={setCompany} placeholder="Company name" style={inputStyle} />
+        <InputField
+          label="Company Name"
+          placeholder="Your company name"
+          value={company}
+          onChangeText={setCompany}
+          leftIcon={<Text style={styles.inputIcon}>🏢</Text>}
+        />
 
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Location</Text>
-        <TextInput value={location} onChangeText={setLocation} placeholder="City / Remote" style={inputStyle} />
+        <InputField
+          label="Location"
+          placeholder="City, State or Remote"
+          value={location}
+          onChangeText={setLocation}
+          leftIcon={<Text style={styles.inputIcon}>📍</Text>}
+        />
 
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Type</Text>
-        <TextInput value={type} onChangeText={setType} placeholder="Full-time / Contract" style={inputStyle} />
+        <InputField
+          label="Job Type"
+          placeholder="Full-time, Part-time, Contract"
+          value={type}
+          onChangeText={setType}
+          leftIcon={<Text style={styles.inputIcon}>⏰</Text>}
+        />
 
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Skills (comma separated)</Text>
-        <TextInput value={skillsText} onChangeText={setSkillsText} placeholder="React, Node, CSS" style={inputStyle} />
+        <InputField
+          label="Required Skills"
+          placeholder="React, Node.js, CSS (comma separated)"
+          value={skillsText}
+          onChangeText={setSkillsText}
+          leftIcon={<Text style={styles.inputIcon}>🛠️</Text>}
+        />
 
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Salary</Text>
-        <TextInput value={salary} onChangeText={setSalary} placeholder="e.g. ₹10L - ₹15L" style={inputStyle} />
+        <InputField
+          label="Salary Range"
+          placeholder="e.g. ₹10L - ₹15L"
+          value={salary}
+          onChangeText={setSalary}
+          leftIcon={<Text style={styles.inputIcon}>💰</Text>}
+        />
 
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Description</Text>
-        <TextInput value={description} onChangeText={setDescription} placeholder="Job description" multiline style={{ ...inputStyle, minHeight: 100 }} />
+        <InputField
+          label="Job Description"
+          placeholder="Describe the role, responsibilities, and requirements..."
+          value={description}
+          onChangeText={setDescription}
+          multiline={true}
+          numberOfLines={4}
+          leftIcon={<Text style={styles.inputIcon}>📝</Text>}
+        />
 
-        <View style={{ marginTop: 12 }}>
-          <PrimaryButton title="Post Job" onPress={handlePost} />
-        </View>
-
-        <View style={{ marginTop: 12 }}>
-          <PrimaryButton title="Cancel" onPress={() => navigation.goBack()} style={{ backgroundColor: '#6b7280' }} />
+        <View style={styles.buttonContainer}>
+          <PrimaryButton 
+            title="Post Job" 
+            onPress={handlePost}
+            style={styles.postButton}
+          />
+          <PrimaryButton 
+            title="Cancel" 
+            onPress={() => navigation.goBack()}
+            variant="outline"
+            style={styles.cancelButton}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-const inputStyle = {
-  borderWidth: 1,
-  borderColor: '#e5e7eb',
-  padding: 12,
-  borderRadius: 8,
-  marginBottom: 12,
-};
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.background,
+  },
+  content: {
+    padding: 24,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: '800',
+    color: Colors.textPrimary,
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: Colors.textSecondary,
+    marginBottom: 24,
+    lineHeight: 22,
+  },
+  inputIcon: {
+    fontSize: 16,
+  },
+  buttonContainer: {
+    marginTop: 24,
+    gap: 12,
+  },
+  postButton: {
+    width: '100%',
+  },
+  cancelButton: {
+    width: '100%',
+  },
+});

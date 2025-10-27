@@ -1,4 +1,4 @@
-// src/screens/Auth/SignUp.jsx - Naukri.com Profile Creation
+// src/screens/Auth/SignUp.jsx - Job Portal Profile Creation
 import { useContext, useEffect, useState } from 'react';
 import {
     Alert,
@@ -213,7 +213,7 @@ export default function SignUp({ navigation, route }) {
           </TouchableOpacity>
 
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Create your Naukri profile</Text>
+            <Text style={styles.title}>Create your Job Portal profile</Text>
             <Text style={styles.subtitle}>
               Search & apply to jobs from India's No.1 Job Site
             </Text>
@@ -292,7 +292,7 @@ export default function SignUp({ navigation, route }) {
 
           {/* Terms and Privacy */}
           <Text style={styles.termsText}>
-            By clicking register, you agree to Naukri's{' '}
+            By clicking register, you agree to Job Portal's{' '}
             <Text style={styles.linkText}>Terms and Conditions</Text> and{' '}
             <Text style={styles.linkText}>Privacy Policy</Text>
           </Text>

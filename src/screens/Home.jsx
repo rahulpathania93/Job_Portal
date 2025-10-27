@@ -1,4 +1,4 @@
-// src/screens/Home.jsx - Naukri.com Home Screen
+// src/screens/Home.jsx - Job Portal Home Screen
 import { useContext, useState } from 'react';
 import {
     FlatList,

@@ -1,85 +1,83 @@
-// src/components/ui/JobCard.jsx - Naukri.com Job Card Design
+// src/components/ui/JobCard.jsx - Job Portal Job Card Design (Naukri.com Style)
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../../constants/colors';
 
-export default function JobCard({ job, onPress, showApplyButton = true }) {
+export default function JobCard({ job, onPress, showApplyButton = true, onSave }) {
+  // Generate random rating for mock data
+  const randomRating = (3.5 + Math.random() * 1.5).toFixed(1);
+  const randomReviews = Math.floor(Math.random() * 50000) + 10;
+  
+  // Generate job level
+  const jobLevels = ['Entry level', 'Associate level', 'Mid level', 'Senior level'];
+  const jobLevel = jobLevels[Math.floor(Math.random() * jobLevels.length)];
+  
+  // Format skills display
+  const skillsDisplay = job.skills.join(', ').toLowerCase();
+  
+  // Generate random days ago
+  const daysAgo = Math.floor(Math.random() * 30) + 1;
+  const timePosted = daysAgo === 1 ? '1d ago' : daysAgo > 30 ? '30+d ago' : `${daysAgo}d ago`;
+
   return (
     <TouchableOpacity 
       onPress={onPress} 
       activeOpacity={0.9} 
       style={styles.container}
     >
-      {/* Job Header */}
-      <View style={styles.header}>
-        <View style={styles.jobInfo}>
-          <Text style={styles.jobTitle}>{job.title}</Text>
-          <Text style={styles.companyName}>{job.company}</Text>
-          <View style={styles.locationContainer}>
-            <Text style={styles.locationIcon}>📍</Text>
-            <Text style={styles.locationText}>{job.location}</Text>
-          </View>
-        </View>
-        <View style={styles.salaryContainer}>
-          <Text style={styles.salary}>{job.salary}</Text>
-          <View style={styles.jobTypeBadge}>
-            <Text style={styles.jobTypeText}>{job.type}</Text>
-          </View>
+      {/* Company Logo Placeholder */}
+      <View style={styles.logoContainer}>
+        <View style={styles.logoPlaceholder}>
+          <Text style={styles.logoText}>{job.company.substring(0, 2).toUpperCase()}</Text>
         </View>
       </View>
 
-      {/* Job Description */}
-      <Text style={styles.description} numberOfLines={2}>
-        {job.description}
-      </Text>
-
-      {/* Skills */}
-      {job.skills && job.skills.length > 0 && (
-        <View style={styles.skillsContainer}>
-          {job.skills.slice(0, 3).map((skill, index) => (
-            <View key={index} style={styles.skillTag}>
-              <Text style={styles.skillText}>{skill}</Text>
-            </View>
-          ))}
-          {job.skills.length > 3 && (
-            <View style={styles.moreSkillsTag}>
-              <Text style={styles.moreSkillsText}>+{job.skills.length - 3} more</Text>
-            </View>
-          )}
-        </View>
-      )}
-
-      {/* Job Footer */}
-      <View style={styles.footer}>
-        <View style={styles.jobMeta}>
-          <Text style={styles.postedTime}>Posted 2 days ago</Text>
-          <Text style={styles.applicantsCount}>
-            {job.applicants?.length || 0} applicants
-          </Text>
+      {/* Job Info */}
+      <View style={styles.jobInfo}>
+        {/* Job Title */}
+        <Text style={styles.jobTitle}>{job.title}</Text>
+        
+        {/* Company Name */}
+        <Text style={styles.companyName}>{job.company}</Text>
+        
+        {/* Rating */}
+        <View style={styles.ratingContainer}>
+          <Text style={styles.starIcon}>⭐</Text>
+          <Text style={styles.rating}>{randomRating} ({randomReviews.toLocaleString()} Reviews)</Text>
         </View>
         
+        {/* Location */}
+        <View style={styles.detailsRow}>
+          <Text style={styles.icon}>📍</Text>
+          <Text style={styles.detailText}>{job.location}</Text>
+        </View>
+        
+        {/* Job Level */}
+        <View style={styles.detailsRow}>
+          <Text style={styles.icon}>💼</Text>
+          <Text style={styles.detailText}>{jobLevel}</Text>
+        </View>
+        
+        {/* Skills */}
+        <Text style={styles.skillsText}>{skillsDisplay}</Text>
+        
+        {/* Posted Time and Save Button */}
+        <View style={styles.footerRow}>
+          <Text style={styles.timePosted}>{timePosted}</Text>
+          <TouchableOpacity 
+            style={styles.saveButton}
+            onPress={() => onSave && onSave(job)}
+          >
+            <Text style={styles.saveIcon}>🔖</Text>
+            <Text style={styles.saveText}>Save</Text>
+          </TouchableOpacity>
+        </View>
+        
+        {/* Apply Button */}
         {showApplyButton && (
           <TouchableOpacity style={styles.applyButton} onPress={onPress}>
             <Text style={styles.applyButtonText}>Apply Now</Text>
           </TouchableOpacity>
         )}
-      </View>
-
-      {/* Job Actions */}
-      <View style={styles.actionsContainer}>
-        <TouchableOpacity style={styles.actionButton}>
-          <Text style={styles.actionIcon}>💾</Text>
-          <Text style={styles.actionText}>Save</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.actionButton}>
-          <Text style={styles.actionIcon}>📤</Text>
-          <Text style={styles.actionText}>Share</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.actionButton}>
-          <Text style={styles.actionIcon}>🔔</Text>
-          <Text style={styles.actionText}>Alert</Text>
-        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );
@@ -88,167 +86,116 @@ export default function JobCard({ job, onPress, showApplyButton = true }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.cardBackground,
-    padding: 16,
-    borderRadius: 12,
+    borderRadius: 8,
     marginBottom: 12,
+    marginHorizontal: 16,
+    padding: 12,
     borderWidth: 1,
     borderColor: Colors.cardBorder,
-    shadowColor: Colors.cardShadow,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 12,
+  logoContainer: {
+    position: 'absolute',
+    right: 12,
+    top: 12,
+    zIndex: 1,
+  },
+  logoPlaceholder: {
+    width: 50,
+    height: 50,
+    backgroundColor: Colors.primary + '20',
+    borderRadius: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: Colors.primary + '40',
+  },
+  logoText: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: Colors.primary,
   },
   jobInfo: {
-    flex: 1,
-    paddingRight: 12,
-    flexShrink: 1,
+    paddingRight: 70, // Space for logo
   },
   jobTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 18,
+    fontWeight: '700',
     color: Colors.textPrimary,
     marginBottom: 4,
     flexWrap: 'wrap',
   },
   companyName: {
-    fontSize: 14,
-    color: Colors.primary,
-    fontWeight: '600',
+    fontSize: 15,
+    color: Colors.textPrimary,
+    fontWeight: '500',
     marginBottom: 6,
-    flexWrap: 'wrap',
   },
-  locationContainer: {
+  ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 4,
   },
-  locationIcon: {
-    fontSize: 12,
+  starIcon: {
+    fontSize: 14,
     marginRight: 4,
   },
-  locationText: {
+  rating: {
+    fontSize: 13,
+    color: Colors.textSecondary,
+  },
+  detailsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  icon: {
+    fontSize: 12,
+    marginRight: 6,
+  },
+  detailText: {
+    fontSize: 13,
+    color: Colors.textSecondary,
+  },
+  skillsText: {
     fontSize: 12,
     color: Colors.textSecondary,
+    marginTop: 6,
+    marginBottom: 8,
+    lineHeight: 16,
   },
-  salaryContainer: {
-    alignItems: 'flex-end',
-    flexShrink: 0,
-    minWidth: 80,
-  },
-  salary: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: Colors.primary,
-    marginBottom: 6,
-  },
-  jobTypeBadge: {
-    backgroundColor: Colors.surface,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: Colors.border,
-  },
-  jobTypeText: {
-    fontSize: 10,
-    color: Colors.textSecondary,
-    fontWeight: '500',
-  },
-  description: {
-    fontSize: 14,
-    color: Colors.textSecondary,
-    lineHeight: 20,
-    marginBottom: 12,
-    flexWrap: 'wrap',
-    flexShrink: 1,
-  },
-  skillsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginBottom: 12,
-    gap: 6,
-  },
-  skillTag: {
-    backgroundColor: Colors.primary + '20',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: Colors.primary + '40',
-  },
-  skillText: {
-    fontSize: 11,
-    color: Colors.primary,
-    fontWeight: '500',
-  },
-  moreSkillsTag: {
-    backgroundColor: Colors.surface,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: Colors.border,
-  },
-  moreSkillsText: {
-    fontSize: 11,
-    color: Colors.textSecondary,
-    fontWeight: '500',
-  },
-  footer: {
+  footerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: 12,
-    borderTopWidth: 1,
-    borderTopColor: Colors.border,
-    marginBottom: 12,
+    marginBottom: 8,
   },
-  jobMeta: {
-    flex: 1,
-  },
-  postedTime: {
+  timePosted: {
     fontSize: 12,
     color: Colors.textLight,
-    marginBottom: 2,
   },
-  applicantsCount: {
+  saveButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  saveIcon: {
+    fontSize: 14,
+    marginRight: 4,
+  },
+  saveText: {
     fontSize: 12,
     color: Colors.textSecondary,
+    fontWeight: '500',
   },
   applyButton: {
     backgroundColor: Colors.primary,
-    paddingHorizontal: 20,
-    paddingVertical: 8,
-    borderRadius: 20,
+    borderRadius: 6,
+    paddingVertical: 10,
+    alignItems: 'center',
+    marginTop: 8,
   },
   applyButtonText: {
-    color: Colors.textPrimary,
+    color: Colors.buttonPrimaryText,
     fontSize: 14,
     fontWeight: '600',
-  },
-  actionsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingTop: 12,
-    borderTopWidth: 1,
-    borderTopColor: Colors.border,
-  },
-  actionButton: {
-    alignItems: 'center',
-    paddingVertical: 8,
-  },
-  actionIcon: {
-    fontSize: 16,
-    marginBottom: 4,
-  },
-  actionText: {
-    fontSize: 11,
-    color: Colors.textSecondary,
-    fontWeight: '500',
   },
 });

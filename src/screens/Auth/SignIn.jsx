@@ -1,4 +1,4 @@
-// src/screens/Auth/SignIn.jsx - Naukri.com Login Screen
+// src/screens/Auth/SignIn.jsx - Job Portal Login Screen
 import { useContext, useEffect, useState } from 'react';
 import {
   Alert,
@@ -192,7 +192,7 @@ export default function SignIn({ navigation, route }) {
             <Text style={styles.backIcon}>←</Text>
           </TouchableOpacity>
           
-          <Text style={styles.title}>Log in to Naukri</Text>
+          <Text style={styles.title}>Log in to Job Portal</Text>
         </View>
 
         {/* Login Method Selection */}

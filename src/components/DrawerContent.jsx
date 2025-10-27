@@ -1,8 +1,9 @@
-// src/components/DrawerContent.jsx - Naukri.com Drawer Menu
+// src/components/DrawerContent.jsx - Job Portal Drawer Menu
 import { useContext, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../constants/colors';
 import { AppContext } from '../context/AppContext';
+import { reset } from '../services/NavigationService';
 
 export default function DrawerContent({ navigation }) {
   const { user, role, logout } = useContext(AppContext);
@@ -19,11 +20,16 @@ export default function DrawerContent({ navigation }) {
           text: 'Logout',
           style: 'destructive',
           onPress: () => {
+            // Clear user data
             logout();
-            navigation.reset({
-              index: 0,
-              routes: [{ name: 'RoleSelect' }],
-            });
+            
+            // Close drawer first
+            navigation.closeDrawer();
+            
+            // Navigate to RoleSelect using navigation service
+            setTimeout(() => {
+              reset('RoleSelect');
+            }, 200);
           },
         },
       ]
@@ -50,7 +56,7 @@ export default function DrawerContent({ navigation }) {
         </View>
         <View style={styles.profileInfo}>
           <Text style={styles.userName}>{user?.name?.toUpperCase() || 'GUEST USER'}</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('MainTabs')}>
+          <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
             <Text style={styles.updateLink}>Update profile</Text>
           </TouchableOpacity>
         </View>
@@ -148,7 +154,7 @@ export default function DrawerContent({ navigation }) {
               onPress={() => navigation.navigate('MainTabs')}
             >
               <Text style={styles.menuIcon}>👑</Text>
-              <Text style={styles.menuText}>Naukri 360 Pro</Text>
+              <Text style={styles.menuText}>Job 360 Pro</Text>
               <Text style={styles.paidLabel}>(Paid)</Text>
             </TouchableOpacity>
             
@@ -157,7 +163,7 @@ export default function DrawerContent({ navigation }) {
               onPress={() => navigation.navigate('MainTabs')}
             >
               <Text style={styles.menuIcon}>📝</Text>
-              <Text style={styles.menuText}>Naukri blog</Text>
+              <Text style={styles.menuText}>Job Portal blog</Text>
             </TouchableOpacity>
             
             <TouchableOpacity
@@ -165,7 +171,7 @@ export default function DrawerContent({ navigation }) {
               onPress={() => navigation.navigate('MainTabs')}
             >
               <Text style={styles.menuIcon}>❓</Text>
-              <Text style={styles.menuText}>How Naukri works</Text>
+              <Text style={styles.menuText}>How Job Portal works</Text>
             </TouchableOpacity>
             
             <TouchableOpacity
@@ -244,7 +250,7 @@ export default function DrawerContent({ navigation }) {
         <TouchableOpacity style={styles.newsBanner}>
           <Text style={styles.newsText}>minis</Text>
           <Text style={styles.newsHeadline}>
-            M&S dumps IT giant TCS after cyberatt... →
+            M&S dumps IT giant TCS after cyberattack... →
           </Text>
         </TouchableOpacity>
         

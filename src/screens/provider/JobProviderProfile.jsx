@@ -1,4 +1,4 @@
-// src/screens/provider/JobProviderProfile.jsx - Naukri.com Provider Dashboard
+// src/screens/provider/JobProviderProfile.jsx - Job Portal Provider Dashboard
 import { useContext } from 'react';
 import {
     ScrollView,

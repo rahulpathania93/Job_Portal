@@ -1,8 +1,9 @@
 // src/screens/Auth/HomePlaceholder.jsx
-import React, { useContext, useMemo } from 'react';
-import { SafeAreaView, ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { useContext, useMemo } from 'react';
+import { SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import PrimaryButton from '../../components/ui/PrimaryButton';
 import { AppContext } from '../../context/AppContext';
+import { reset } from '../../services/NavigationService';
 
 export default function HomePlaceholder({ navigation }) {
   const { user, role, logout, jobs = [], appliedJobIds = [], profile } = useContext(AppContext);
@@ -33,7 +34,7 @@ export default function HomePlaceholder({ navigation }) {
 
   function handleLogout() {
     logout();
-    navigation.replace('RoleSelect');
+    reset('RoleSelect');
   }
 
   function handleChangeRole() {

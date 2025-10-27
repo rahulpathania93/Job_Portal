@@ -77,6 +77,10 @@ export function AppProvider({ children }) {
     if (mockUser) {
       setUser(mockUser);
       setRole(mockUser.role);
+      // Set profile from user data if available
+      if (mockUser.fullName || mockUser.experience) {
+        setProfile(mockUser);
+      }
       return mockUser;
     }
     
@@ -126,6 +130,10 @@ export function AppProvider({ children }) {
   function logout() {
     setUser(null);
     setRole(null);
+    setProfile(null);
+    setAppliedJobIds([]);
+    // Clear AsyncStorage
+    AsyncStorage.removeItem(PROFILE_KEY);
   }
 
   return (

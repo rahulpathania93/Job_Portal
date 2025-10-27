@@ -2,6 +2,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
+import { navigationRef } from '../services/NavigationService';
 
 import HomePlaceholder from '../screens/Auth/HomePlaceholder';
 import ProviderAuthOptions from '../screens/Auth/ProviderAuthOptions';
@@ -12,7 +13,9 @@ import TabNavigator from './TabNavigator';
 
 // Individual screens for stack navigation
 import JobProviderProfile from '../screens/provider/JobProviderProfile';
+import EditProfile from '../screens/seeker/EditProfile';
 import JobDetail from '../screens/seeker/JobDetail';
+import JobList from '../screens/seeker/JobList';
 import SearchJobs from '../screens/seeker/SearchJobs';
 
 const Stack = createNativeStackNavigator();
@@ -24,6 +27,7 @@ export default function AppNavigator() {
     <Stack.Navigator 
       initialRouteName="RoleSelect" 
       screenOptions={{ headerShown: false }}
+      ref={navigationRef}
     >
       {/* Auth Flow */}
       <Stack.Screen name="RoleSelect" component={RoleSelect} />
@@ -38,6 +42,8 @@ export default function AppNavigator() {
       <Stack.Screen name="JobDetail" component={JobDetail} />
       <Stack.Screen name="JobProviderProfile" component={JobProviderProfile} />
       <Stack.Screen name="SearchJobs" component={SearchJobs} />
+      <Stack.Screen name="JobList" component={JobList} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="HomePlaceholder" component={HomePlaceholder} />
     </Stack.Navigator>
   );

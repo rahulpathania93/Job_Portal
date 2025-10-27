@@ -1,9 +1,10 @@
-// src/screens/seeker/SearchJobs.jsx - Naukri.com Job Search Screen
+// src/screens/seeker/SearchJobs.jsx - Job Portal Job Search Screen
 import { useContext, useState } from 'react';
 import {
     ScrollView,
     StyleSheet,
     Text,
+    TextInput,
     TouchableOpacity,
     View
 } from 'react-native';
@@ -12,15 +13,17 @@ import { AppContext } from '../../context/AppContext';
 
 export default function SearchJobs({ navigation }) {
   const { jobs } = useContext(AppContext);
-  const [searchSkill, setSearchSkill] = useState('');
-  const [searchLocation, setSearchLocation] = useState('');
+  
+  // Pre-filled data
+  const [searchSkill, setSearchSkill] = useState('Node.js, React Native');
+  const [searchLocation, setSearchLocation] = useState('Mumbai');
   const [recentSearches] = useState(['Node.js', 'React Developer', 'Python', 'AWS']);
 
   const handleSearch = () => {
-    // Navigate to job list with search filters
-    navigation.navigate('ApplyTab', {
-      searchQuery: searchSkill,
-      location: searchLocation,
+    // Navigate to dedicated JobList screen with search filters
+    navigation.navigate('JobList', {
+      searchQuery: '', // Show all jobs by default
+      location: '',
     });
   };
 
@@ -45,9 +48,13 @@ export default function SearchJobs({ navigation }) {
         <View style={styles.inputBox}>
           <Text style={styles.inputLabel}>Skills, designations, companies</Text>
           <View style={styles.inputLine}>
-            <Text style={styles.inputText}>
-              {searchSkill || 'Enter skills, designations, companies'}
-            </Text>
+            <TextInput
+              style={[styles.inputText, styles.inputTextFilled]}
+              value={searchSkill}
+              onChangeText={setSearchSkill}
+              placeholder="Enter skills, designations, companies"
+              placeholderTextColor={Colors.inputPlaceholder}
+            />
             <View style={styles.inputUnderline} />
           </View>
         </View>
@@ -56,9 +63,13 @@ export default function SearchJobs({ navigation }) {
         <View style={styles.inputBox}>
           <Text style={styles.inputLabel}>Location</Text>
           <View style={styles.inputLine}>
-            <Text style={styles.inputText}>
-              {searchLocation || 'Enter location'}
-            </Text>
+            <TextInput
+              style={[styles.inputText, styles.inputTextFilled]}
+              value={searchLocation}
+              onChangeText={setSearchLocation}
+              placeholder="Enter location"
+              placeholderTextColor={Colors.inputPlaceholder}
+            />
             <View style={styles.inputUnderline} />
           </View>
         </View>
@@ -205,8 +216,11 @@ const styles = StyleSheet.create({
   },
   inputText: {
     fontSize: 16,
-    color: Colors.textPrimary,
+    color: Colors.inputPlaceholder,
     paddingVertical: 12,
+  },
+  inputTextFilled: {
+    color: Colors.textPrimary,
   },
   inputUnderline: {
     height: 1,

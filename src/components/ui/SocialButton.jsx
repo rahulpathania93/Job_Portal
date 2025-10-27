@@ -1,4 +1,4 @@
-// src/components/ui/SocialButton.jsx - Naukri.com Social Button Design
+// src/components/ui/SocialButton.jsx - Job Portal Social Button Design
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../../constants/colors';
 

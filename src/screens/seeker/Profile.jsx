@@ -1,4 +1,4 @@
-// src/screens/seeker/Profile.jsx - Naukri.com Profile Screen
+// src/screens/seeker/Profile.jsx - Job Portal Profile Screen
 import { useContext, useState } from 'react';
 import {
   ScrollView,

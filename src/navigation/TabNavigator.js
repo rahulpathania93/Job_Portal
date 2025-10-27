@@ -1,4 +1,4 @@
-// src/navigation/TabNavigator.js - Naukri.com Bottom Navigation
+// src/navigation/TabNavigator.js - Job Portal Bottom Navigation
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useContext } from 'react';
@@ -52,6 +52,7 @@ function SeekerTabs() {
     <Tab.Navigator
         screenOptions={{
           headerShown: false,
+          tabBarShowLabel: false, // Hide default labels, we use custom TabIcon
           tabBarStyle: {
             backgroundColor: Colors.navBackground,
             borderTopWidth: 1,
@@ -66,6 +67,7 @@ function SeekerTabs() {
           name="HomeTab"
           component={Home}
           options={{
+            tabBarLabel: 'Home',
             tabBarIcon: ({ focused }) => (
               <TabIcon icon="🏠" label="Home" focused={focused} />
             ),
@@ -75,6 +77,7 @@ function SeekerTabs() {
           name="ApplyTab"
           component={JobList}
           options={{
+            tabBarLabel: 'Apply',
             tabBarIcon: ({ focused }) => (
               <TabIcon 
                 icon="📋" 
@@ -89,6 +92,7 @@ function SeekerTabs() {
           name="NVitesTab"
           component={Dashboard}
           options={{
+            tabBarLabel: 'NVites',
             tabBarIcon: ({ focused }) => (
               <TabIcon icon="📨" label="NVites" focused={focused} />
             ),
@@ -98,6 +102,7 @@ function SeekerTabs() {
           name="ProfileTab"
           component={Profile}
           options={{
+            tabBarLabel: 'Profile',
             tabBarIcon: ({ focused }) => (
               <TabIcon icon="👤" label="Profile" focused={focused} />
             ),
@@ -107,8 +112,9 @@ function SeekerTabs() {
           name="Naukri360Tab"
           component={Dashboard}
           options={{
+            tabBarLabel: 'Job 360',
             tabBarIcon: ({ focused }) => (
-              <TabIcon icon="🧭" label="Naukri 360" focused={focused} />
+              <TabIcon icon="🧭" label="Job 360" focused={focused} />
             ),
           }}
         />
@@ -122,6 +128,7 @@ function ProviderTabs() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarShowLabel: false, // Hide default labels, we use custom TabIcon
         tabBarStyle: {
           backgroundColor: Colors.navBackground,
           borderTopWidth: 1,
@@ -136,6 +143,7 @@ function ProviderTabs() {
         name="HomeTab"
         component={Home}
         options={{
+          tabBarLabel: 'Home',
           tabBarIcon: ({ focused }) => (
             <TabIcon icon="🏠" label="Home" focused={focused} />
           ),
@@ -145,6 +153,7 @@ function ProviderTabs() {
         name="MyJobsTab"
         component={ProviderJobs}
         options={{
+          tabBarLabel: 'My Jobs',
           tabBarIcon: ({ focused }) => (
             <TabIcon icon="💼" label="My Jobs" focused={focused} />
           ),
@@ -154,6 +163,7 @@ function ProviderTabs() {
         name="PostJobTab"
         component={PostJobForm}
         options={{
+          tabBarLabel: 'Post Job',
           tabBarIcon: ({ focused }) => (
             <TabIcon icon="➕" label="Post Job" focused={focused} />
           ),
@@ -163,6 +173,7 @@ function ProviderTabs() {
         name="AnalyticsTab"
         component={AnalyticsDashboard}
         options={{
+          tabBarLabel: 'Analytics',
           tabBarIcon: ({ focused }) => (
             <TabIcon icon="📊" label="Analytics" focused={focused} />
           ),
@@ -172,6 +183,7 @@ function ProviderTabs() {
         name="ProfileTab"
         component={Profile}
         options={{
+          tabBarLabel: 'Profile',
           tabBarIcon: ({ focused }) => (
             <TabIcon icon="👤" label="Profile" focused={focused} />
           ),

@@ -1,4 +1,4 @@
-// src/screens/RoleSelect.jsx - Naukri.com Landing Page
+// src/screens/RoleSelect.jsx - Job Portal Landing Page
 import { useContext } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../constants/colors';
@@ -31,7 +31,7 @@ export default function RoleSelect({ navigation }) {
 
       {/* Hero Section */}
       <View style={styles.heroSection}>
-        <Text style={styles.heroTitle}>Make the most of Naukri by creating your job profile</Text>
+        <Text style={styles.heroTitle}>Make the most of Job Portal by creating your job profile</Text>
         
         <View style={styles.benefitsContainer}>
           <View style={styles.benefitItem}>

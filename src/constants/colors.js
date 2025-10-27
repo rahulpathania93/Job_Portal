@@ -1,12 +1,12 @@
-// Color scheme for Job Portal app - Exact Naukri.com colors
+// Color scheme for Job Portal app
 export const Colors = {
-  // Primary colors (Naukri.com blue)
-  primary: '#1976D2', // Naukri blue
+  // Primary colors (Job Portal blue)
+  primary: '#1976D2', // Primary blue
   primaryDark: '#1565C0',
   primaryLight: '#42A5F5',
   
-  // Secondary colors (Naukri.com orange/red)
-  secondary: '#FF6B35', // Naukri orange
+  // Secondary colors (Job Portal orange/red)
+  secondary: '#FF6B35', // Orange accent
   secondaryDark: '#E55A2B',
   secondaryLight: '#FF8A65',
   
@@ -14,7 +14,7 @@ export const Colors = {
   accent: '#FFD700', // Gold
   accentDark: '#FFC107',
   
-  // Background colors (Dark theme like Naukri)
+  // Background colors (Dark theme)
   background: '#121212', // Dark background
   backgroundLight: '#1E1E1E',
   surface: '#1F1F1F',

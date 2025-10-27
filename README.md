@@ -1,4 +1,4 @@
-# Job Portal - Naukri.com Replica
+# Job Portal 
 
 A modern React Native mobile application that replicates the design and functionality of Naukri.com, built with a neon green, white, and black color scheme.
 

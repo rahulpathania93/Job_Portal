@@ -1,6 +1,7 @@
 // src/screens/provider/JobProviderProfile.jsx - Job Portal Provider Dashboard
 import { useContext } from 'react';
 import {
+    Alert,
     ScrollView,
     StyleSheet,
     Text,
@@ -11,12 +12,55 @@ import { Colors } from '../../constants/colors';
 import { AppContext } from '../../context/AppContext';
 
 export default function JobProviderProfile({ navigation }) {
-  const { user, jobs } = useContext(AppContext);
+  const { user, jobs, logout } = useContext(AppContext);
 
   // Calculate stats
   const myJobs = jobs.filter(j => j.postedBy === user?.email);
   const totalApplicants = myJobs.reduce((sum, job) => sum + (job.applicants?.length || 0), 0);
   const activeJobs = myJobs.length;
+
+  // Safe navigation helper to prevent errors
+  const safeNavigate = (screenName, params = {}) => {
+    try {
+      navigation.navigate(screenName, params);
+    } catch (error) {
+      console.log('Navigation error:', error);
+      // Fallback: try to navigate to MainTabs
+      try {
+        navigation.navigate('MainTabs');
+      } catch (fallbackError) {
+        console.log('Fallback navigation also failed:', fallbackError);
+      }
+    }
+  };
+
+  const handleLogout = () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to logout?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Logout',
+          style: 'destructive',
+          onPress: () => {
+            console.log('Logout button pressed - clearing user data');
+            logout();
+            console.log('User data cleared, attempting navigation reset');
+            
+            // Use navigation prop directly since this screen is in the main stack
+            setTimeout(() => {
+              console.log('Attempting to reset navigation to RoleSelect');
+              navigation.reset({
+                index: 0,
+                routes: [{ name: 'RoleSelect' }],
+              });
+            }, 100);
+          },
+        },
+      ]
+    );
+  };
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -36,6 +80,9 @@ export default function JobProviderProfile({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          <Text style={styles.logoutText}>Logout</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Stats Cards */}
@@ -60,28 +107,40 @@ export default function JobProviderProfile({ navigation }) {
         <View style={styles.actionsGrid}>
           <TouchableOpacity 
             style={styles.actionCard}
-            onPress={() => navigation.navigate('PostJob')}
+            onPress={() => {
+              // Navigate to MainTabs first, then to PostJobTab
+              safeNavigate('MainTabs', { screen: 'PostJobTab' });
+            }}
           >
             <Text style={styles.actionIcon}>📝</Text>
             <Text style={styles.actionText}>Post a Job</Text>
           </TouchableOpacity>
           <TouchableOpacity 
             style={styles.actionCard}
-            onPress={() => navigation.navigate('MyJobsTab')}
+            onPress={() => {
+              // Navigate to MainTabs first, then to MyJobsTab
+              safeNavigate('MainTabs', { screen: 'MyJobsTab' });
+            }}
           >
             <Text style={styles.actionIcon}>📋</Text>
             <Text style={styles.actionText}>My Jobs</Text>
           </TouchableOpacity>
           <TouchableOpacity 
             style={styles.actionCard}
-            onPress={() => navigation.navigate('AnalyticsTab')}
+            onPress={() => {
+              // Navigate to MainTabs first, then to AnalyticsTab
+              safeNavigate('MainTabs', { screen: 'AnalyticsTab' });
+            }}
           >
             <Text style={styles.actionIcon}>📊</Text>
             <Text style={styles.actionText}>Analytics</Text>
           </TouchableOpacity>
           <TouchableOpacity 
             style={styles.actionCard}
-            onPress={() => navigation.navigate('ProfileTab')}
+            onPress={() => {
+              // Navigate to MainTabs first, then to ProfileTab
+              safeNavigate('MainTabs', { screen: 'ProfileTab' });
+            }}
           >
             <Text style={styles.actionIcon}>⚙️</Text>
             <Text style={styles.actionText}>Settings</Text>
@@ -93,7 +152,10 @@ export default function JobProviderProfile({ navigation }) {
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Recent Job Postings</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('MyJobsTab')}>
+          <TouchableOpacity onPress={() => {
+            // Navigate to MainTabs first, then to MyJobsTab
+            safeNavigate('MainTabs', { screen: 'MyJobsTab' });
+          }}>
             <Text style={styles.seeAllText}>See All</Text>
           </TouchableOpacity>
         </View>
@@ -107,7 +169,10 @@ export default function JobProviderProfile({ navigation }) {
             </Text>
             <TouchableOpacity 
               style={styles.primaryButton}
-              onPress={() => navigation.navigate('PostJob')}
+              onPress={() => {
+                // Navigate to MainTabs first, then to PostJobTab
+                safeNavigate('MainTabs', { screen: 'PostJobTab' });
+              }}
             >
               <Text style={styles.primaryButtonText}>Post Your First Job</Text>
             </TouchableOpacity>
@@ -193,10 +258,14 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     paddingBottom: 30,
     paddingHorizontal: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
   },
   profileSection: {
     flexDirection: 'row',
     alignItems: 'center',
+    flex: 1,
   },
   avatar: {
     width: 80,
@@ -234,6 +303,18 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   editButtonText: {
+    color: Colors.textPrimary,
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  logoutButton: {
+    backgroundColor: Colors.error,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 6,
+    marginLeft: 16,
+  },
+  logoutText: {
     color: Colors.textPrimary,
     fontSize: 14,
     fontWeight: '600',

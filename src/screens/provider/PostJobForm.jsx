@@ -24,6 +24,7 @@ export default function PostJobForm({ navigation }) {
     }
 
     const newJob = {
+      id: Date.now().toString(), // Generate unique ID
       title: title.trim(),
       company: company.trim(),
       location: location.trim() || 'Remote',
@@ -33,12 +34,22 @@ export default function PostJobForm({ navigation }) {
       description: description.trim(),
       postedBy: user?.email || 'unknown',
       applicants: [],
+      postedDate: new Date().toISOString(),
     };
 
     postJob(newJob);
 
-    Alert.alert('Posted', 'Job posted (mock).');
-    navigation.navigate('ProviderJobs'); // go back to provider jobs list
+    Alert.alert('Success', 'Job posted successfully!', [
+      { text: 'OK', onPress: () => {
+        try {
+          navigation.navigate('MyJobsTab');
+        } catch (error) {
+          console.log('Navigation error:', error);
+          // Fallback: go back
+          navigation.goBack();
+        }
+      }}
+    ]);
   }
 
   return (

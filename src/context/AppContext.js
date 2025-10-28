@@ -128,12 +128,14 @@ export function AppProvider({ children }) {
   }
 
   function logout() {
+    console.log('AppContext: logout called');
     setUser(null);
     setRole(null);
     setProfile(null);
     setAppliedJobIds([]);
     // Clear AsyncStorage
     AsyncStorage.removeItem(PROFILE_KEY);
+    console.log('AppContext: logout completed - all data cleared');
   }
 
   return (

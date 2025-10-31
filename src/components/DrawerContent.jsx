@@ -7,7 +7,8 @@ import { reset } from '../services/NavigationService';
 
 export default function DrawerContent({ navigation }) {
   const { user, role, logout } = useContext(AppContext);
-  const [profilePercentage, setProfilePercentage] = useState(100);
+  // const [profilePercentage, setProfilePercentage] = useState(100);
+  const [profilePercentage] = useState(100);
   const [notLookingForJobs, setNotLookingForJobs] = useState(true);
 
   const handleLogout = () => {

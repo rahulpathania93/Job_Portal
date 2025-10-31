@@ -1,4 +1,4 @@
-// src/components/ui/JobCard.jsx - Job Portal Job Card Design (Naukri.com Style)
+
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../../constants/colors';
 

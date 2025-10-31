@@ -1,6 +1,6 @@
 # Job Portal 
 
-A modern React Native mobile application that replicates the design and functionality of Naukri.com, built with a neon green, white, and black color scheme.
+A modern React Native mobile application that replicates the design and functionality of Job portals, built with a neon green, white, and black color scheme.
 
 ## 🚀 Features
 
@@ -21,7 +21,7 @@ A modern React Native mobile application that replicates the design and function
 - **Company Profile**: Manage company information
 
 ### General Features
-- **Modern UI**: Naukri.com inspired design with neon green theme
+- **Modern UI**: Job Portal inspired design with neon green theme
 - **Responsive Design**: Optimized for mobile devices
 - **Tab Navigation**: Intuitive bottom tab navigation
 - **Search & Filter**: Advanced job search with multiple filters
@@ -212,7 +212,7 @@ All colors are defined in `src/constants/colors.js` for easy customization.
 
 ## 📄 License
 
-This project is for educational purposes and is a replica of Naukri.com for learning React Native development.
+This project is for educational purposes and is a replica of Job Portal for learning React Native development.
 
 ## 🤝 Contributing
 

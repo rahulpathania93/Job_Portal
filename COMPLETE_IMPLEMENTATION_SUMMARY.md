@@ -29,9 +29,9 @@
   - Chat for help (New badge)
   - Settings
   - Jobseeker services (Paid)
-  - Naukri 360 Pro (Paid)
-  - Naukri blog
-  - How Naukri works
+  - Job Portal 360 Pro (Paid)
+  - Job Portal blog
+  - How Job Portal works
   - Write to us
   - About us
 - Job Provider Menu:
@@ -42,7 +42,7 @@
   - Settings
 - Logout button (red highlighted)
 - Footer with version info, news banner, and feedback buttons
-- Exact match with Naukri.com design
+- Exact match with Job Portal.com design
 
 **Usage**: Click hamburger menu (☰) on Home screen
 
@@ -75,7 +75,7 @@
 - ✅ Video Profile Section
 - ✅ Accomplishments
 
-**Design**: Exact match with Naukri.com mobile app
+**Design**: Exact match with Job Portal.com mobile app
 
 ---
 
@@ -92,7 +92,7 @@
 - Top companies section
   - Company cards with logos, ratings, tags
 - Browse by category (horizontal scroll)
-- Exacts match with Naukri.com design
+- Exacts match with Job Portal.com design
 
 **Navigation**: 
 - From Home screen: Click search bar → Opens SearchJobs screen
@@ -120,7 +120,7 @@
 ### **Job Seeker Flow:**
 ```
 Login (ryan@yahoo.com / 123456) 
-→ MainTabs (Home, Apply, NVites, Profile, Naukri 360)
+→ MainTabs (Home, Apply, NVites, Profile, Job Portal 360)
 → Click ☰ → Drawer Menu Opens
 → Select "My Profile" → Comprehensive Profile Screen
 → Click Search Bar → Search Screen
@@ -200,7 +200,7 @@ The app is now fully functional with:
 - ✅ Comprehensive profile screen
 - ✅ Search functionality
 - ✅ All mock data in place
-- ✅ Professional UI matching Naukri.com
+- ✅ Professional UI matching Job Portal.com
 
 **Scan the QR code again and test all features!** 🎉
 

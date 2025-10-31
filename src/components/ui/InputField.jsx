@@ -1,4 +1,3 @@
-// src/components/ui/InputField.jsx - Job Portal Input Design
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../../constants/colors';

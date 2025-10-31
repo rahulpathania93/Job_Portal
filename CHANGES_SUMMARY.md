@@ -2,7 +2,7 @@
 
 ## Summary of Changes
 
-This document outlines all the changes made to implement the updated authentication flow with real-time validation and Naukri.com-style provider profile.
+This document outlines all the changes made to implement the updated authentication flow with real-time validation and Job Portal.com-style provider profile.
 
 ---
 
@@ -157,7 +157,7 @@ This component can be reused across the app for any validated input needs:
 
 ## 🎨 Design Consistency
 
-All changes maintain the existing Naukri.com inspired design:
+All changes maintain the existing Job Portal.com inspired design:
 - Dark theme with neon accents
 - Primary blue color (#1976D2)
 - Orange secondary color (#FF6B35)
@@ -240,9 +240,9 @@ All changes maintain the existing Naukri.com inspired design:
 - Shows error if not exactly 10 digits
 - Validates while typing
 
-### **Naukri.com-Style Job Provider Profile**
+### **Job Portal.com-Style Job Provider Profile**
 
-Created a new comprehensive provider dashboard that matches Naukri.com's design:
+Created a new comprehensive provider dashboard that matches Job Portal.com's design:
 
 ✅ **New Screen**: `JobProviderProfile.jsx`
 
@@ -266,7 +266,7 @@ Created a new comprehensive provider dashboard that matches Naukri.com's design:
 ### **Updated Files:**
 1. `src/screens/Auth/SignIn.jsx` - Real-time validation + provider navigation
 2. `src/screens/Auth/SignUp.jsx` - Real-time validation + provider navigation
-3. `src/screens/provider/JobProviderProfile.jsx` - NEW (Naukri.com-style dashboard)
+3. `src/screens/provider/JobProviderProfile.jsx` - NEW (Job Portal.com-style dashboard)
 4. `src/navigation/AppNavigator.js` - Added provider profile to stack
 
 ---

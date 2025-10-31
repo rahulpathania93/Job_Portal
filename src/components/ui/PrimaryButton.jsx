@@ -1,4 +1,4 @@
-// src/components/ui/PrimaryButton.jsx
+
 import { Text, TouchableOpacity } from 'react-native';
 
 export default function PrimaryButton({ title, onPress, style }) {

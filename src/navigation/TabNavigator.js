@@ -223,14 +223,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
+    paddingHorizontal: 8,   
+    minWidth: 64,           
+    maxWidth: 92,           
   },
   tabIcon: {
     fontSize: 20,
-    marginBottom: 4,
+    marginBottom: 2,
   },
   tabLabel: {
-    fontSize: 11,
+    fontSize: 10,          // slightly smaller to fit better on mobiles
     fontWeight: '500',
+    lineHeight: 14,
+    textAlign: 'center',
   },
   badge: {
     position: 'absolute',
@@ -242,6 +247,7 @@ const styles = StyleSheet.create({
     height: 16,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 3,
   },
   badgeText: {
     color: Colors.textPrimary,

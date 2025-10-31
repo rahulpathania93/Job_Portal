@@ -11,7 +11,8 @@ import { Colors } from '../../constants/colors';
 import { AppContext } from '../../context/AppContext';
 
 export default function Profile({ navigation }) {
-  const { user, profile, setProfile } = useContext(AppContext);
+  // const { user, profile, setProfile } = useContext(AppContext);
+  const { user } = useContext(AppContext);
 
   // Mock profile data
   const [employmentData] = useState([
@@ -393,11 +394,11 @@ export default function Profile({ navigation }) {
         
         <View style={styles.accomplishmentsContainer}>
           <TouchableOpacity style={styles.accomplishmentButton}>
-            <Text style={styles.accomplishmentText}>Research publication ></Text>
+            <Text style={styles.accomplishmentText}>Research publication </Text>
           </TouchableOpacity>
           
           <TouchableOpacity style={styles.accomplishmentButton}>
-            <Text style={styles.accomplishmentText}>Patent ></Text>
+            <Text style={styles.accomplishmentText}>Patent </Text>
           </TouchableOpacity>
           
           <TouchableOpacity style={styles.accomplishmentButton}>
